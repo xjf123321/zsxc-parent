@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsBasicCarMapper">
+
+    <select id="countStatus" resultType="com.zs.create.modules.system.entity.ZsBasicCar">
+        select * from zs_basic_car where del_flag = '0'
+    </select>
+
+    <select id="count" parameterType="string" resultType="java.lang.Long">
+        select count(1) from zs_basic_car where vehicle_number = #{vehicleNumber} AND del_flag = '0'
+    </select>
+
+    <select id="countPlateNumber" parameterType="string" resultType="java.lang.Long">
+        select count(1) from zs_basic_car where plate_number = #{plateNumber} AND del_flag = '0'
+    </select>
+
+    <update id="updateCarStatus" parameterType="string">
+        update zs_basic_car set status = #{status} where id = #{id}
+    </update>
+
+    <select id="selectPlateNumber" parameterType="string" resultType="string">
+        select plate_number from zs_basic_car where id = #{id}
+    </select>
+
+    <update id="updateCarLock" parameterType="string">
+        update zs_basic_car set status = #{status} where id =#{id}
+    </update>
+
+    <update id="updateTime">
+        update zs_basic_car set start_time = #{startTime},end_time = #{endTime} where id = #{id}
+    </update>
+
+    <select id="selectCar" resultType="com.zs.create.modules.system.entity.ZsBasicCar">
+        select * from zs_basic_car where del_flag = '0' and status in ('0')
+    </select>
+
+    <update id="cleanTime" parameterType="string">
+        update zs_basic_car set start_time = null,end_time = null where id = #{id}
+    </update>
+
+    <update id="updateCar" parameterType="java.util.List">
+        <foreach collection="list" separator=";" item="cus">
+            update zs_basic_car set
+            vehicle_number = #{cus.vehicleNumber},
+            plate_number = #{cus.plateNumber},
+            brand = #{cus.brand},
+            seat_number = #{cus.seatNumber},
+            vehicle_dept = #{cus.vehicleDept},
+            vehicle_type = #{cus.vehicleType},
+            frame_number = #{cus.frameNumber},
+            engine_number = #{cus.engineNumber},
+            registration_number = #{cus.registrationNumber},
+            annual_date = #{cus.annualDate},
+            business_date = #{cus.businessDate},
+            buy_date = #{cus.buyDate},
+            stop_act = #{cus.stopAct},
+            status = #{cus.status},
+            remarks = #{cus.remarks},
+            url = #{cus.url},
+            creater = #{cus.creater},
+            realname = #{cus.realname},
+            del_flag = #{cus.delFlag},
+            create_time = #{cus.createTime},
+            updater = #{cus.updater},
+            update_date = #{cus.updateDate},
+            start_time = #{cus.startTime},
+            end_time = #{cus.endTime}
+            where id = #{cus.id}
+        </foreach>
+    </update>
+
+    <select id="selectIdByNumber" parameterType="string">
+        select id from zs_basic_car where plate_number = #{plateNumber}
+    </select>
+
+    <update id="updateBasicCar">
+        update zs_basic_car set status = '0',start_time = #{startTime},end_time = #{endTime} where id = #{id}
+    </update>
+
+    <select id="selectAll" resultType="string">
+        select id from zs_basic_car
+    </select>
+
+</mapper>

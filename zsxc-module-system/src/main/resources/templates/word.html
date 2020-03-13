@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>在线编辑Office文件</title>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="pageoffice.js" id="po_js_main"></script>
+    <script type="text/javascript" th:inline="javascript">
+        function Save() {
+            document.getElementById("PageOfficeCtrl1").WebSave();
+            var a1=document.getElementById("PageOfficeCtrl1").CustomSaveResult;
+            var url = encodeURI(encodeURI(a1));
+            var sResult = window.external.CallParentFunc("getValue('"+url+"');");
+            if(sResult=='poerror:parentlost'){
+                alert('父页面关闭或跳转刷新了，导致父页面函数没有调用成功！');
+            }
+
+            window.external.close();
+        }
+
+
+       /* function Open() {
+            document.getElementById("PageOfficeCtrl1").OpenImageDialog();
+        }*/
+
+        function a() {
+            alert(document.getElementsByClassName("pic")[0].value)
+        }
+
+
+    </script>
+</head>
+<body>
+<!--<select >
+    <option class="pic" value="C:\Users\My\Desktop\新建文件夹\zs\123.png" onclick=a()>签名1</option>
+</select>-->
+<div style="width:100%;height:900px; align-content: center" th:utext="${pageoffice}"></div>
+
+</body>
+</html>

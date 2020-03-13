@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqBackMapper">
+    <!-- 根据部门id查询申请 待审批 -->
+    <select id="backApplyCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back  z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.applyer_dept = #{deptId} AND z.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ) k
+    </select>
+
+    <!-- 根据部门id查询申请 待审批-->
+    <select id="backApplyList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqBack">
+        SELECT
+        z.id AS id,
+        z.user_id AS userId,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.applyer_dept = #{deptId} AND z.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="personnelCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back  z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status = '1'
+        ) k
+    </select>
+
+    <select id="personnelList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqBack">
+        SELECT
+        z.id AS id,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status = '1'
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="allowListCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back  z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        LEFT JOIN zs_back_guocheng g ON z.id = g.back_id
+        WHERE  z.del_flag = '0' AND  g.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        GROUP by id
+        ) k
+    </select>
+
+    <select id="allowList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqBack">
+        SELECT
+        z.id AS id,
+        z.username,
+        z.type,
+        z.`status` AS status,
+        z.actual_leave_start AS actualLeaveStart,
+        z.emergency_level AS emergencyLevel,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_back z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+       LEFT JOIN zs_back_guocheng g ON z.id = g.back_id
+        WHERE  z.del_flag = '0' AND g.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY z.create_time DESC
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_back set status = #{status} where id = #{id}
+    </update>
+
+    <select id="backCount" parameterType="string" resultType="long">
+        SELECT COUNT(1) FROM zs_sq_back WHERE user_id = #{userId} AND del_flag = '0'
+    </select>
+
+</mapper>

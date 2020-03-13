@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.LawRecordsMapper">
+
+    <select id="selectLByUserId" parameterType="string" resultType="com.zs.create.modules.system.entity.LawRecords">
+        select * from t_armyman_law_records where user_id = #{id}
+    </select>
+
+    <delete id="deleteByUserId" parameterType="string">
+        delete from t_armyman_law_records where user_id = #{userId}
+    </delete>
+
+</mapper>

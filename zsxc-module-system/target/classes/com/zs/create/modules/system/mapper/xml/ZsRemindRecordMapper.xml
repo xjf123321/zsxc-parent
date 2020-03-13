@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.ZsRemindRecordMapper">
+
+    <select id="select" resultType="com.zs.create.modules.system.entity.ZsRemindRecord">
+        select * from zs_remind_record where txsj = #{txsj}
+        AND txdx = #{txdx}
+    </select>
+
+</mapper>

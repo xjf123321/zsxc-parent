@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.ZsCarGuochengMapper">
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsCarGuocheng">
+        select * from zs_car_guocheng where car_id = #{carId} AND state in ('1','2','3')
+    </select>
+
+    <select id="selectId" parameterType="string" resultType="string">
+        select
+        a.car_id
+        from
+        zs_car_guocheng a
+        left join
+        zs_sq_car b
+        on
+        a.car_id = b.id
+        where
+        a.approval_person = #{approvalPerson}
+        AND a.state = '0'
+        AND a.number = a.flag
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND b.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND b.title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username !=null and username !=''">
+            AND b.username like concat(concat("%",#{username}),"%")
+        </if>
+    </select>
+
+    <update id="updateCarGuochengStatus">
+        update zs_car_guocheng set
+        state = '1',
+        play_name = #{playName},
+        approval_opinion = #{approvalOpinion},
+        user_name = #{userName},
+        autograph = #{autograph},
+        create_time = #{createTime},
+        user_id = #{approvalPerson},
+        flag = '0'
+        where
+        car_id = #{carId}
+        AND approval_person = #{approvalPerson}
+        AND state = '0'
+    </update>
+
+    <select id="selectCarGuocheng" parameterType="string" resultType="string">
+        select number from
+        zs_car_guocheng
+        where
+        approval_person = #{approvalPerson}
+        AND car_id = #{carId}
+        AND state in ('0','1')
+        AND flag != '-1'
+    </select>
+
+    <update id="updateCarGuochengNumber" parameterType="string">
+        update zs_car_guocheng set
+        flag = #{number}
+        where
+        number = #{number}
+        AND car_id = #{carId}
+        AND state = '0'
+    </update>
+
+    <select id="selectCarGuochengNumber" parameterType="string" resultType="string">
+        select number from
+        zs_car_guocheng
+        where
+        car_id = #{carId}
+        AND state in ('0','1')
+    </select>
+
+    <update id="updateNotCarGuochengStatus">
+        update zs_car_guocheng set
+        state = '2',
+        play_name = #{playName},
+        approval_opinion = #{approvalOpinion},
+        user_name = #{userName},
+        create_time = #{createTime},
+        user_id = #{approvalPerson},
+        flag = '0'
+        where
+        car_id = #{carId}
+        AND approval_person = #{approvalPerson}
+        AND flag != '-1'
+    </update>
+
+    <delete id="clean" parameterType="string">
+        delete from zs_car_guocheng where car_id = #{carId} AND state = '0'
+    </delete>
+
+    <select id="selectApprovalPerson" parameterType="string" resultType="string">
+        select approval_person from zs_car_guocheng where flag = number AND car_id = #{carId} AND state = '0'
+    </select>
+
+    <select id="findAllUser" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsCarGuocheng">
+        SELECT * FROM zs_car_guocheng where car_id = #{carId} AND state in ('0','1','2') AND flag != '-1'
+    </select>
+
+    <update id="updateFlag" parameterType="string">
+        update zs_car_guocheng set flag = '-1' where car_id = #{carId}
+    </update>
+
+    <delete id="deleteCar" parameterType="string">
+        delete from zs_car_guocheng where car_id = #{carId}
+    </delete>
+
+    <select id="selectCarId" parameterType="string" resultType="string">
+        select car_id from zs_car_guocheng where user_id = #{userId} and state in ('1','2','3')
+    </select>
+
+
+</mapper>

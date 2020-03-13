@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.process.mapper.ZsMeettingGuochengMapper">
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.process.entity.ZsMeettingGuocheng">
+        select * from zs_meetting_guocheng where meetting_id = #{meettingId} ORDER BY create_time
+    </select>
+
+    <select id="selectRoomIds" parameterType="string" resultType="string">
+        select meetting_id from zs_meetting_guocheng where user_id = #{userId} and state in ('1','2','3','4','5')
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.process.mapper.ZsLeaveGuochengMapper">
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.process.entity.ZsLeaveGuocheng">
+        select * from zs_leave_guocheng where leave_id = #{leaveId} and state IN ('1','2','3')
+    </select>
+
+    <select id="findAllUser" parameterType="string" resultType="com.zs.create.modules.process.entity.ZsLeaveGuocheng">
+        SELECT * FROM zs_leave_guocheng where leave_id = #{id} and state in ('0','1','2') AND flag != '-1'
+    </select>
+
+    <update id="updateFlag" parameterType="string">
+        UPDATE zs_leave_guocheng set flag = '-1' where leave_id = #{id}
+    </update>
+
+    <select id="selectLeaveIds" parameterType="string" resultType="string">
+        select leave_id from zs_leave_guocheng where user_id = #{userId} and state in ('1','2')
+    </select>
+
+
+</mapper>

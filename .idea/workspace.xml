@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="85dfd991-ce0b-405f-aec7-c108452e041f" name="Default Changelist" comment="申请表单中意见和过程表中的意见修改">
+      <change afterPath="$PROJECT_DIR$/zsxc-module-system/src/test/java/com/zs/create/index" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/zsxc-module-system/src/test/java/com/zs/create/index/login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/base/util/FileHelperUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/base/util/FileHelperUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/base/util/YouBianCodeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/base/util/YouBianCodeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/config/rtxconf/RTXConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/config/rtxconf/RTXConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/modules/system/controller/OfficePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/modules/system/controller/OfficePageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/file/license.lic" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/main/resources/file/license.lic" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/src/test/java/com/zs/create/form/FormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/src/test/java/com/zs/create/form/FormTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-module-system/zsxc-module-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-module-system/zsxc-module-system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/zsxc-parent.iml" beforeDir="false" afterPath="$PROJECT_DIR$/zsxc-parent.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="zsxc-parent" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\cfr\ahwj\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/maven/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\maven\apache-maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WBzKonLJ4OK90Qv9L8O2bDrpH0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="144" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="144" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="144" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="143" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="144" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="143" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="OPEN_URL_DIALOG">
+      <recent name="https://github.com/cfrzjj/springbootelasticsearch.git" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ZsxcSystemApplication">
+    <configuration name="WordToPdf" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.zs.create.modules.system.util.WordToPdf" />
+      <module name="zsxc-module-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zs.create.modules.system.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="login.test007" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="zsxc-module-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zs.create.index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.zs.create.index" />
+      <option name="MAIN_CLASS_NAME" value="com.zs.create.index.login" />
+      <option name="METHOD_NAME" value="test007" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="login.test008" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="zsxc-module-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zs.create.index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.zs.create.index" />
+      <option name="MAIN_CLASS_NAME" value="com.zs.create.index.login" />
+      <option name="METHOD_NAME" value="test008" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="login.test009" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="zsxc-module-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zs.create.index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.zs.create.index" />
+      <option name="MAIN_CLASS_NAME" value="com.zs.create.index.login" />
+      <option name="METHOD_NAME" value="test009" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="login.test02" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="zsxc-module-system" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.zs.create.index.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.zs.create.index" />
+      <option name="MAIN_CLASS_NAME" value="com.zs.create.index.login" />
+      <option name="METHOD_NAME" value="test02" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZsxcSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="zsxc-module-system" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zs.create.ZsxcSystemApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.login.test009" />
+        <item itemvalue="JUnit.login.test008" />
+        <item itemvalue="JUnit.login.test02" />
+        <item itemvalue="Application.WordToPdf" />
+        <item itemvalue="JUnit.login.test007" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\LENOVO\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\cfr\ahwj" />
+          <option name="myCopyRoot" value="D:\cfr\ahwj" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\cfr\ahwj" />
+          <option name="myCopyRoot" value="D:\cfr\ahwj" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="85dfd991-ce0b-405f-aec7-c108452e041f" name="Default Changelist" comment="" />
+      <created>1570609306164</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570609306164</updated>
+      <workItem from="1570609307407" duration="1881000" />
+      <workItem from="1570611240489" duration="72000" />
+      <workItem from="1570611356516" duration="1361000" />
+      <workItem from="1570612751808" duration="406000" />
+      <workItem from="1570613204583" duration="417000" />
+      <workItem from="1570613650207" duration="105000" />
+      <workItem from="1570613776785" duration="828000" />
+      <workItem from="1570667398935" duration="13599000" />
+      <workItem from="1570754040600" duration="5948000" />
+      <workItem from="1570840324173" duration="21691000" />
+      <workItem from="1571013733878" duration="22100000" />
+      <workItem from="1571099716802" duration="16716000" />
+      <workItem from="1571126942146" duration="3472000" />
+      <workItem from="1571139973810" duration="344000" />
+      <workItem from="1571140344966" duration="8734000" />
+      <workItem from="1571186207484" duration="20698000" />
+      <workItem from="1571272140751" duration="21652000" />
+      <workItem from="1571358973953" duration="20627000" />
+      <workItem from="1571617843615" duration="23035000" />
+      <workItem from="1571705199380" duration="25162000" />
+      <workItem from="1571791764251" duration="24669000" />
+      <workItem from="1571833151540" duration="719000" />
+      <workItem from="1571877438578" duration="32172000" />
+      <workItem from="1571963700900" duration="21863000" />
+      <workItem from="1572224830088" duration="30231000" />
+      <workItem from="1572309943471" duration="13163000" />
+      <workItem from="1572331239323" duration="55665000" />
+      <workItem from="1572448075823" duration="1127000" />
+      <workItem from="1572482256499" duration="29682000" />
+      <workItem from="1572526625127" duration="7244000" />
+      <workItem from="1572569098723" duration="24505000" />
+      <workItem from="1572827859623" duration="10948000" />
+      <workItem from="1572845592782" duration="239000" />
+      <workItem from="1572845868356" duration="15815000" />
+      <workItem from="1572914232709" duration="14979000" />
+      <workItem from="1572931781347" duration="36665000" />
+      <workItem from="1573001633659" duration="39711000" />
+      <workItem from="1573087756664" duration="3734000" />
+      <workItem from="1573092619134" duration="9244000" />
+      <workItem from="1573107809677" duration="57554000" />
+      <workItem from="1573213131150" duration="1263000" />
+      <workItem from="1573269375509" duration="5069000" />
+      <workItem from="1573282419596" duration="17943000" />
+      <workItem from="1573402162703" duration="1048000" />
+      <workItem from="1573434962383" duration="22812000" />
+      <workItem from="1573520017412" duration="10339000" />
+      <workItem from="1573537915327" duration="1413000" />
+      <workItem from="1573539496874" duration="13814000" />
+      <workItem from="1573555274478" duration="7000000" />
+      <workItem from="1573606097670" duration="11786000" />
+      <workItem from="1573624310472" duration="23242000" />
+      <workItem from="1573691802645" duration="28734000" />
+      <workItem from="1573779997935" duration="4110000" />
+      <workItem from="1573784802309" duration="14775000" />
+      <workItem from="1574038978885" duration="22352000" />
+      <workItem from="1574124864032" duration="24654000" />
+      <workItem from="1574210546113" duration="23390000" />
+      <workItem from="1574297142917" duration="20711000" />
+      <workItem from="1574384261374" duration="21157000" />
+      <workItem from="1574564820214" duration="2071000" />
+      <workItem from="1574643476477" duration="22527000" />
+      <workItem from="1574728539815" duration="4451000" />
+      <workItem from="1574734315992" duration="9370000" />
+      <workItem from="1574750020109" duration="12945000" />
+      <workItem from="1574816541276" duration="22702000" />
+      <workItem from="1574900978225" duration="4510000" />
+      <workItem from="1574910387078" duration="2104000" />
+      <workItem from="1574919652400" duration="1769000" />
+      <workItem from="1574921889947" duration="2118000" />
+      <workItem from="1574940101816" duration="156000" />
+      <workItem from="1574940284948" duration="5478000" />
+      <workItem from="1574994756571" duration="714000" />
+      <workItem from="1574997066738" duration="598000" />
+      <workItem from="1575248634360" duration="7594000" />
+      <workItem from="1575334359393" duration="18246000" />
+      <workItem from="1575420025033" duration="12144000" />
+      <workItem from="1575471731602" duration="11161000" />
+      <workItem from="1575592571166" duration="5108000" />
+      <workItem from="1575852121689" duration="18920000" />
+      <workItem from="1575939606265" duration="1909000" />
+      <workItem from="1575962082693" duration="1687000" />
+      <workItem from="1575968482206" duration="45000" />
+      <workItem from="1576111740686" duration="3002000" />
+      <workItem from="1576131862014" duration="383000" />
+      <workItem from="1576133950607" duration="2117000" />
+      <workItem from="1576198182068" duration="264000" />
+      <workItem from="1576204896555" duration="13836000" />
+      <workItem from="1576457784626" duration="25111000" />
+      <workItem from="1576542586931" duration="2261000" />
+      <workItem from="1576544874789" duration="322000" />
+      <workItem from="1576545222021" duration="8675000" />
+      <workItem from="1576569587616" duration="50000" />
+      <workItem from="1576569640608" duration="2000" />
+      <workItem from="1576571235256" duration="8000" />
+      <workItem from="1576571290581" duration="631000" />
+      <workItem from="1576630014959" duration="22611000" />
+      <workItem from="1576716675979" duration="973000" />
+      <workItem from="1576720830044" duration="17760000" />
+      <workItem from="1576802219728" duration="23364000" />
+      <workItem from="1577062180981" duration="12272000" />
+      <workItem from="1577080566593" duration="1234000" />
+      <workItem from="1577082371846" duration="10699000" />
+      <workItem from="1577148532154" duration="10275000" />
+      <workItem from="1577164386945" duration="14678000" />
+      <workItem from="1577234655954" duration="23662000" />
+      <workItem from="1577320123144" duration="25886000" />
+      <workItem from="1577406437618" duration="7458000" />
+      <workItem from="1577427311039" duration="3971000" />
+      <workItem from="1577666808629" duration="511000" />
+      <workItem from="1578363071479" duration="905000" />
+      <workItem from="1578363998091" duration="7442000" />
+      <workItem from="1578445038815" duration="2725000" />
+      <workItem from="1578451822864" duration="17743000" />
+      <workItem from="1578530378050" duration="6766000" />
+      <workItem from="1578549634483" duration="1062000" />
+      <workItem from="1578550977724" duration="10294000" />
+      <workItem from="1578626044689" duration="10000" />
+      <workItem from="1578637717475" duration="474000" />
+      <workItem from="1578638384602" duration="326000" />
+      <workItem from="1578638724375" duration="6000" />
+      <workItem from="1578886897456" duration="5979000" />
+      <workItem from="1578988746352" duration="17000" />
+      <workItem from="1578988891876" duration="18000" />
+      <workItem from="1578989174918" duration="41000" />
+      <workItem from="1578989716658" duration="18000" />
+      <workItem from="1578990072114" duration="17000" />
+      <workItem from="1578991695471" duration="14000" />
+      <workItem from="1579049220721" duration="682000" />
+      <workItem from="1579052326945" duration="2000" />
+      <workItem from="1579053007055" duration="29000" />
+      <workItem from="1579065447448" duration="7301000" />
+      <workItem from="1579075677629" duration="113000" />
+      <workItem from="1579140601358" duration="58000" />
+      <workItem from="1582019125517" duration="659000" />
+      <workItem from="1582073415044" duration="2539000" />
+      <workItem from="1582176849699" duration="2003000" />
+      <workItem from="1582507144192" duration="6847000" />
+      <workItem from="1582521914449" duration="10535000" />
+      <workItem from="1582538677158" duration="2259000" />
+      <workItem from="1582593329788" duration="9857000" />
+      <workItem from="1582682568118" duration="3119000" />
+      <workItem from="1582702286005" duration="2211000" />
+      <workItem from="1582782538163" duration="16313000" />
+      <workItem from="1582852761393" duration="3587000" />
+      <workItem from="1582901358296" duration="636000" />
+      <workItem from="1583113455804" duration="338000" />
+      <workItem from="1583113800805" duration="3000" />
+      <workItem from="1583200887233" duration="19008000" />
+      <workItem from="1583282142713" duration="22489000" />
+      <workItem from="1583368937944" duration="18723000" />
+      <workItem from="1583455197133" duration="32000" />
+      <workItem from="1583463697357" duration="3295000" />
+      <workItem from="1583805150846" duration="17253000" />
+      <workItem from="1583886890406" duration="22809000" />
+      <workItem from="1583972822088" duration="13626000" />
+      <workItem from="1584000681924" duration="2585000" />
+      <workItem from="1584060533919" duration="3450000" />
+    </task>
+    <task id="LOCAL-00202" summary="申请表单中意见和过程表中的意见修改">
+      <created>1577348911099</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1577348911099</updated>
+    </task>
+    <task id="LOCAL-00203" summary="申请表单中意见和过程表中的意见修改">
+      <created>1577350879878</created>
+      <option name="number" value="00203" />
+      <option name="presentableId" value="LOCAL-00203" />
+      <option name="project" value="LOCAL" />
+      <updated>1577350879878</updated>
+    </task>
+    <task id="LOCAL-00204" summary="申请表单中意见和过程表中的意见修改">
+      <created>1577407817219</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1577407817219</updated>
+    </task>
+    <task id="LOCAL-00205" summary="申请表单中意见和过程表中的意见修改">
+      <created>1577410181029</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1577410181029</updated>
+    </task>
+    <task id="LOCAL-00206" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578367614730</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1578367614731</updated>
+    </task>
+    <task id="LOCAL-00207" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578376066981</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1578376066981</updated>
+    </task>
+    <task id="LOCAL-00208" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578446845184</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1578446845185</updated>
+    </task>
+    <task id="LOCAL-00209" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578467867705</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1578467867705</updated>
+    </task>
+    <task id="LOCAL-00210" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578468926990</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1578468926990</updated>
+    </task>
+    <task id="LOCAL-00211" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578478075045</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1578478075046</updated>
+    </task>
+    <task id="LOCAL-00212" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578479772001</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1578479772001</updated>
+    </task>
+    <task id="LOCAL-00213" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578481806318</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1578481806318</updated>
+    </task>
+    <task id="LOCAL-00214" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578531424539</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1578531424540</updated>
+    </task>
+    <task id="LOCAL-00215" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578533506971</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1578533506971</updated>
+    </task>
+    <task id="LOCAL-00216" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578537495273</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1578537495273</updated>
+    </task>
+    <task id="LOCAL-00217" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578538692097</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1578538692097</updated>
+    </task>
+    <task id="LOCAL-00218" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578550372828</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1578550372828</updated>
+    </task>
+    <task id="LOCAL-00219" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578551571794</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1578551571794</updated>
+    </task>
+    <task id="LOCAL-00220" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578557622527</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1578557622528</updated>
+    </task>
+    <task id="LOCAL-00221" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578558472019</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1578558472019</updated>
+    </task>
+    <task id="LOCAL-00222" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578560605756</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1578560605756</updated>
+    </task>
+    <task id="LOCAL-00223" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578560859522</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1578560859522</updated>
+    </task>
+    <task id="LOCAL-00224" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578561944990</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1578561944990</updated>
+    </task>
+    <task id="LOCAL-00225" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578566843938</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1578566843938</updated>
+    </task>
+    <task id="LOCAL-00226" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578570958779</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1578570958779</updated>
+    </task>
+    <task id="LOCAL-00227" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578893750400</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1578893750401</updated>
+    </task>
+    <task id="LOCAL-00228" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578894276588</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1578894276588</updated>
+    </task>
+    <task id="LOCAL-00229" summary="申请表单中意见和过程表中的意见修改">
+      <created>1578895830194</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1578895830194</updated>
+    </task>
+    <task id="LOCAL-00230" summary="申请表单中意见和过程表中的意见修改">
+      <created>1579067800950</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1579067800951</updated>
+    </task>
+    <task id="LOCAL-00231" summary="申请表单中意见和过程表中的意见修改">
+      <created>1579068931850</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1579068931850</updated>
+    </task>
+    <task id="LOCAL-00232" summary="申请表单中意见和过程表中的意见修改">
+      <created>1579070750724</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1579070750724</updated>
+    </task>
+    <task id="LOCAL-00233" summary="申请表单中意见和过程表中的意见修改">
+      <created>1579070827723</created>
+      <option name="number" value="00233" />
+      <option name="presentableId" value="LOCAL-00233" />
+      <option name="project" value="LOCAL" />
+      <updated>1579070827723</updated>
+    </task>
+    <task id="LOCAL-00234" summary="申请表单中意见和过程表中的意见修改">
+      <created>1579072439752</created>
+      <option name="number" value="00234" />
+      <option name="presentableId" value="LOCAL-00234" />
+      <option name="project" value="LOCAL" />
+      <updated>1579072439752</updated>
+    </task>
+    <task id="LOCAL-00235" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582593380415</created>
+      <option name="number" value="00235" />
+      <option name="presentableId" value="LOCAL-00235" />
+      <option name="project" value="LOCAL" />
+      <updated>1582593380416</updated>
+    </task>
+    <task id="LOCAL-00236" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582600603443</created>
+      <option name="number" value="00236" />
+      <option name="presentableId" value="LOCAL-00236" />
+      <option name="project" value="LOCAL" />
+      <updated>1582600603443</updated>
+    </task>
+    <task id="LOCAL-00237" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582616268211</created>
+      <option name="number" value="00237" />
+      <option name="presentableId" value="LOCAL-00237" />
+      <option name="project" value="LOCAL" />
+      <updated>1582616268211</updated>
+    </task>
+    <task id="LOCAL-00238" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582703000132</created>
+      <option name="number" value="00238" />
+      <option name="presentableId" value="LOCAL-00238" />
+      <option name="project" value="LOCAL" />
+      <updated>1582703000132</updated>
+    </task>
+    <task id="LOCAL-00239" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582852964175</created>
+      <option name="number" value="00239" />
+      <option name="presentableId" value="LOCAL-00239" />
+      <option name="project" value="LOCAL" />
+      <updated>1582852964175</updated>
+    </task>
+    <task id="LOCAL-00240" summary="申请表单中意见和过程表中的意见修改">
+      <created>1582861670067</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1582861670067</updated>
+    </task>
+    <task id="LOCAL-00241" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583285708395</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1583285708396</updated>
+    </task>
+    <task id="LOCAL-00242" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583290234710</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1583290234710</updated>
+    </task>
+    <task id="LOCAL-00243" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583291349977</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1583291349977</updated>
+    </task>
+    <task id="LOCAL-00244" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583303054655</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1583303054655</updated>
+    </task>
+    <task id="LOCAL-00245" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583307485784</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1583307485784</updated>
+    </task>
+    <task id="LOCAL-00246" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583392949955</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1583392949956</updated>
+    </task>
+    <task id="LOCAL-00247" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583465080375</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1583465080375</updated>
+    </task>
+    <task id="LOCAL-00248" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583825998877</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1583825998878</updated>
+    </task>
+    <task id="LOCAL-00249" summary="申请表单中意见和过程表中的意见修改">
+      <created>1583996187775</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1583996187776</updated>
+    </task>
+    <task id="LOCAL-00250" summary="申请表单中意见和过程表中的意见修改">
+      <created>1584064908263</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1584064908264</updated>
+    </task>
+    <option name="localTasksCounter" value="251" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="D:/LocalRepository" />
+    </ignored-roots>
+    <MESSAGE value="车辆，会议，公文，公告，请销假审批流程的相关修改" />
+    <MESSAGE value="车辆和会议的相关信息修改" />
+    <MESSAGE value="车辆审批相关流程信息的修改" />
+    <MESSAGE value="车辆和会议室的相关修改信息" />
+    <MESSAGE value="车辆修改相关修改信息" />
+    <MESSAGE value="所有相关信息的修改内容" />
+    <MESSAGE value="用户管理等相关的修改信息" />
+    <MESSAGE value="军人违法违规的相关内容" />
+    <MESSAGE value="账户名称改为真实姓名" />
+    <MESSAGE value="车辆申请中账户名称改为真是姓名" />
+    <MESSAGE value="车辆表中账户名称改为真是姓名" />
+    <MESSAGE value="车辆表中账户名称改为真实姓名" />
+    <MESSAGE value="部门表中添加相关负责人" />
+    <MESSAGE value="车辆，会议，请假，销假添加字段" />
+    <MESSAGE value="修改车辆会议室，请销假等相关修改信息" />
+    <MESSAGE value="用户管理注释掉军人违法记录的相关功能" />
+    <MESSAGE value="修改相关的sql语句错误，进行提交" />
+    <MESSAGE value="用户管理的相关信息修改进行提交" />
+    <MESSAGE value="修改返回类型的相关数据" />
+    <MESSAGE value="公文的列表的分页查询的相关代码" />
+    <MESSAGE value="车辆申请表信息和过程表数据回显示" />
+    <MESSAGE value="车辆申请审批领导审批修改状态" />
+    <MESSAGE value="公文审批流程的相关代码" />
+    <MESSAGE value="申请表单中意见和过程表中的意见" />
+    <MESSAGE value="申请表单中意见和过程表中的意见修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="申请表单中意见和过程表中的意见修改" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser" timestamp="1583894299821">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1583894299821" />
+    <state x="399" y="208" width="483" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1583894242512">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="399" y="208" width="483" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1583894242512" />
+    <state x="371" y="91" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1582538524596">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="91" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1582538524596" />
+    <state x="214" y="0" key="CommitChangelistDialog2" timestamp="1584064906132">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="214" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1584064906132" />
+    <state width="904" height="466" key="DebuggerActiveHint" timestamp="1583917307637">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="904" height="466" key="DebuggerActiveHint/0.0.1280.680@0.0.1280.680" timestamp="1583917307637" />
+    <state x="128" y="56" key="DiffContextDialog" timestamp="1583915280367">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="128" y="56" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1583915280367" />
+    <state x="613" y="108" key="FileChooserDialogImpl" timestamp="1584003452692">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="613" y="108" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1584003452692" />
+    <state width="1237" height="270" key="GridCell.Tab.0.bottom" timestamp="1584063822397">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584063822397" />
+    <state width="1237" height="270" key="GridCell.Tab.0.center" timestamp="1584063822397">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1584063822397" />
+    <state width="1237" height="270" key="GridCell.Tab.0.left" timestamp="1584063822396">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1584063822396" />
+    <state width="1237" height="270" key="GridCell.Tab.0.right" timestamp="1584063822397">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1584063822397" />
+    <state width="1237" height="270" key="GridCell.Tab.1.bottom" timestamp="1584063822398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584063822398" />
+    <state width="1237" height="270" key="GridCell.Tab.1.center" timestamp="1584063822398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1584063822398" />
+    <state width="1237" height="270" key="GridCell.Tab.1.left" timestamp="1584063822398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1584063822398" />
+    <state width="1237" height="270" key="GridCell.Tab.1.right" timestamp="1584063822398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="270" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1584063822398" />
+    <state width="1237" height="241" key="GridCell.Tab.2.bottom" timestamp="1584000315501">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="241" key="GridCell.Tab.2.bottom/0.0.1280.680@0.0.1280.680" timestamp="1584000315501" />
+    <state width="1237" height="241" key="GridCell.Tab.2.center" timestamp="1584000315501">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="241" key="GridCell.Tab.2.center/0.0.1280.680@0.0.1280.680" timestamp="1584000315501" />
+    <state width="1237" height="241" key="GridCell.Tab.2.left" timestamp="1584000315501">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="241" key="GridCell.Tab.2.left/0.0.1280.680@0.0.1280.680" timestamp="1584000315501" />
+    <state width="1237" height="241" key="GridCell.Tab.2.right" timestamp="1584000315501">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="241" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1584000315501" />
+    <state x="152" y="0" key="SettingsEditor" timestamp="1584065192292">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="152" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1584065192292" />
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog" timestamp="1584060540041">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="337" y="169" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584060540041" />
+    <state x="459" y="200" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1584064881500">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="459" y="200" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1584064881500" />
+    <state x="461" y="97" width="715" height="490" key="find.popup" timestamp="1584061123962">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="461" y="97" width="715" height="490" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1584061123962" />
+    <state x="28" y="0" key="new project wizard" timestamp="1578638531474">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="28" y="0" key="new project wizard/0.0.1280.680@0.0.1280.680" timestamp="1578638531474" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1583291972587">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1583291972587" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1583916121777">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1583916121777" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/modules/system/service/impl/ZsSqNoticeServiceImpl.java</url>
+          <line>230</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/zsxc-module-system/src/main/java/com/zs/create/modules/system/service/impl/ZsSqNoticeServiceImpl.java</url>
+          <line>249</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="this" />
+      </configuration>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="vehicle.remarks" />
+        <watch expression="vehicle.update.hash" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>zsxc-module-system</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-core:1.2.3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

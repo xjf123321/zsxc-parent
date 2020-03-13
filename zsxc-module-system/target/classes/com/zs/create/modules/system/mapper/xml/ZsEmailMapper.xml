@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.ZsEmailMapper">
+
+    <insert id="insertEmail" parameterType="com.zs.create.modules.system.entity.ZsEmail">
+        insert into zs_email
+        VALUES
+        (#{id},#{send},#{sendName},#{receiver},#{copyer},#{secret},#{title},#{status},#{description},#{createDate},#{saveDate},#{type},#{delFlag},#{emailId},#{sendStatus});
+    </insert>
+
+    <select id="findListBySend" parameterType="java.lang.String" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+          SELECT e.*,c.*,r.id AS rid,r.state,r.read_type,r.del_flag,r.del_date,r.email_id,r.loginname
+          from zs_email e LEFT join zs_email_recording  r on e.id = r.email_id
+          LEFT join zs_email_content c ON e.id = c.email_id
+          WHERE e.send = #{send}
+    </select>
+
+    <select id="queryPage" parameterType="com.zs.create.modules.system.entity.QueryEmail" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+        SELECT e.*,
+        c.email_id AS c_email_id,c.text,c.annex,
+        r.id AS rid,r.state,r.read_type,r.del_flag AS rDel,r.del_date,r.email_id AS r_email_id,r.loginname
+        from zs_email e LEFT join zs_email_recording  r on e.id = r.email_id
+        LEFT join zs_email_content c ON e.id = c.email_id
+        <where>
+            <if test="queryEmail.send!=null and queryEmail.send!='' ">
+                AND e.send = #{queryEmail.send}
+            </if>
+            <if test="queryEmail.sendName!=null and queryEmail.sendName!='' ">
+                AND e.send_name = #{queryEmail.sendName}
+            </if>
+            <if test="queryEmail.receiver!=null and queryEmail.receiver!='' ">
+                AND r.loginname = #{queryEmail.receiver}
+            </if>
+            <if test="queryEmail.title!=null and queryEmail.title!='' ">
+                AND e.title = #{queryEmail.title}
+            </if>
+            <if test="queryEmail.status!=null  ">
+                AND e.status = #{queryEmail.status}
+            </if>
+            <if test="queryEmail.eDel!=null ">
+                AND e.del_flag = #{queryEmail.eDel}
+            </if>
+            <if test="queryEmail.rDel!=null  ">
+                AND r.del_flag = #{queryEmail.rDel}
+            </if>
+            <if test="queryEmail.id!=null and queryEmail.id!=''">
+                AND e.id = #{queryEmail.id}
+            </if>
+            <if test="queryEmail.loginname!=null and queryEmail.loginname!=''">
+                AND r.loginname = #{queryEmail.loginname}
+            </if>
+            <if test="queryEmail.state!=null">
+                AND r.state = #{queryEmail.state}
+            </if>
+        </where>
+        ORDER BY create_date DESC
+    </select>
+
+    <update id="updateDel" parameterType="java.lang.String">
+        UPDATE zs_email set del_flag = 1 where id = #{id}
+    </update>
+
+    <select id="findById" parameterType="java.lang.String" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+        SELECT
+        e.id AS id,
+        e.send AS send,
+        e.send_name AS sendName,
+        e.receiver AS receiver,
+        e.title AS title,
+        e.description AS description,
+        e.create_time AS createTime,
+        e.ids AS ids,
+        c.msg_content as msgContent,
+        c.annex as annex
+        from zs_email e
+        LEFT
+         join zs_email_content c ON e.id = c.email_id
+        WHERE e.id = #{id}
+    </select>
+
+    <select id="searchInbox"  resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+        SELECT
+        e.id AS id,
+        e.send_name AS sendName,
+        e.receiver AS receiver,
+        e.title AS title,
+        e.description AS description,
+        e.ids AS ids,
+        r.read_type AS readType,
+        e.create_time AS createTime,
+        c.msg_content as msgContent,
+        c.annex as annex
+        from zs_email e
+        LEFT join zs_email_recording  r on e.id = r.email_id
+         join zs_email_content c ON e.id = c.email_id
+        WHERE r.loginname = #{id} AND r.del_flag = 0
+        <if test="zsEmailVO.sendName!=null and zsEmailVO.sendName!='' ">
+            AND e.send_name LIKE concat(concat("%",#{zsEmailVO.sendName}),"%")
+        </if>
+        <if test="zsEmailVO.title!=null and zsEmailVO.title!='' ">
+            AND e.title LIKE concat(concat("%",#{zsEmailVO.title}),"%")
+        </if>
+        <if test="queryEmail.title!=null and queryEmail.title!='' ">
+            AND (e.send_name LIKE concat(concat("%",#{queryEmail.sendName}),"%") OR e.title LIKE concat(concat("%",#{queryEmail.title}),"%") OR c.msg_content LIKE concat(concat("%",#{queryEmail.msgContent}),"%"))
+        </if>
+        ORDER BY createTime DESC
+    </select>
+
+    <select id="searchOutbox"  resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+        SELECT
+        e.id AS id,
+        e.send_name AS sendName,
+        e.receiver AS receiver,
+        e.title AS title,
+        e.description AS description,
+        e.ids AS ids,
+        e.create_time AS createTime,
+        c.msg_content as msgContent,
+        c.annex as annex
+        from zs_email e
+        LEFT
+         join zs_email_content c ON e.id = c.email_id
+        WHERE e.send = #{id} AND e.status = 1 AND e.del_flag = 0
+        <if test="zsEmailVO.receiver!=null and zsEmailVO.receiver!='' ">
+            AND e.receiver LIKE concat(concat("%",#{zsEmailVO.receiver}),"%")
+        </if>
+        <if test="zsEmailVO.title!=null and zsEmailVO.title!='' ">
+            AND e.title LIKE concat(concat("%",#{zsEmailVO.title}),"%")
+        </if>
+        <if test="queryEmail.title!=null and queryEmail.title!='' ">
+            AND (e.receiver LIKE concat(concat("%",#{queryEmail.receiver}),"%") OR e.title LIKE concat(concat("%",#{queryEmail.title}),"%") OR c.msg_content like concat(concat("%",#{queryEmail.msgContent}),"%"))
+        </if>
+        ORDER BY createTime DESC
+    </select>
+
+    <select id="searchDrafts" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+        SELECT
+        e.id AS id,
+        e.send_name AS sendName,
+        e.receiver AS receiver,
+        e.title AS title,
+        e.description AS description,
+        e.create_time AS createTime,
+        e.ids AS ids,
+        c.msg_content as msgContent,
+        c.annex as annex
+        from zs_email e
+        LEFT join zs_email_content c ON e.id = c.email_id
+        WHERE e.send = #{id} AND e.status = 0 AND e.del_flag = 0
+        <if test="zsEmailVO.receiver!=null and zsEmailVO.receiver!='' ">
+            AND e.receiver LIKE concat(concat("%",#{zsEmailVO.receiver}),"%")
+        </if>
+        <if test="zsEmailVO.title!=null and zsEmailVO.title!='' ">
+            AND e.title LIKE concat(concat("%",#{zsEmailVO.title}),"%")
+        </if>
+        <if test="queryEmail.title!=null and queryEmail.title!='' ">
+            AND (e.receiver LIKE concat(concat("%",#{queryEmail.receiver}),"%") OR e.title LIKE concat(concat("%",#{queryEmail.title}),"%") OR c.msg_content LIKE concat(concat("%",#{queryEmail.msgContent}),"%"))
+        </if>
+        ORDER BY createTime DESC
+    </select>
+    
+    <select id="searchDustbin" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+         SELECT
+        e.id AS id,
+        e.send_name AS sendName,
+        e.receiver AS receiver,
+        e.title AS title,
+        e.description AS description,
+        e.create_time AS createTime,
+        e.ids AS ids,
+        c.msg_content as msgContent,
+        c.annex as annex
+        from zs_email e
+        LEFT join zs_email_recording  r on e.id = r.email_id
+         join zs_email_content c ON e.id = c.email_id
+        WHERE r.loginname = #{id} AND r.del_flag = 1
+        <if test="zsEmailVO.sendName!=null and zsEmailVO.sendName!='' ">
+            AND e.send_name LIKE concat(concat("%",#{zsEmailVO.send}),"%")
+        </if>
+        <if test="zsEmailVO.title!=null and zsEmailVO.title!='' ">
+            AND e.title LIKE concat(concat("%",#{zsEmailVO.title}),"%")
+        </if>
+        <if test="queryEmail.title!=null and queryEmail.title!='' ">
+           AND (e.send_name LIKE concat(concat("%",#{queryEmail.sendName}),"%") OR e.title LIKE concat(concat("%",#{queryEmail.title}),"%") OR c.msg_content LIKE concat(concat("%",#{queryEmail.msgContent}),"%"))
+        </if>
+       ORDER BY createTime DESC
+    </select>
+
+    <select id="search" parameterType="com.zs.create.modules.system.entity.QueryEmail" resultType="com.zs.create.modules.system.vo.ZsEmailVO">
+         SELECT * from (
+        SELECT e.*,
+        c.email_id AS c_email_id,c.text,c.annex,
+        r.id AS rid,r.state,r.read_type,r.del_flag AS rDel,r.del_date,r.email_id AS r_email_id,r.loginname
+        from zs_email e LEFT join zs_email_recording  r on e.id = r.email_id
+        LEFT join zs_email_content c ON e.id = c.email_id
+        WHERE e.del_flag = 1 OR r.del_flag=1
+        ) AS em
+        WHERE
+       em.send = #{queryEmail.send} OR em.loginname = #{queryEmail.loginname}
+       ORDER BY create_date DESC
+    </select>
+
+</mapper>

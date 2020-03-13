@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.workflow.mapper.BpmWorkMapper">
+
+    <!-- 我的任务总数 -->
+    <select id="workCount" parameterType="String" resultType="long">
+        select count(1) as num from (
+        SELECT
+        t.taskId,
+        t.applyId,
+        t.taskStaus,
+        t.taskTime,
+        t.taskName,
+        t.formDataId,
+        t.userId,
+        t.sqId,
+        t.workId,
+        t.deptName,
+        t.realName,
+        t.taskType
+        FROM
+        (
+        #个人任务
+        SELECT DISTINCT
+        RES1.id_ AS taskId,
+        RES1.CREATE_TIME_,
+        s.id AS applyId,
+        s.`business_status` AS taskStaus,
+        s.`business_sqtime` AS taskTime,
+        s.`business_name` AS taskName,
+        s.`business_form_data_id` AS formDataId,
+        s.`emergency_level`,
+        s.`sq_id` as sqId,
+        s.work_id as workId,
+        s.dept_id AS deptId,
+        de.depart_name AS deptName,
+        s.parent_dept_id AS parentDeptId,
+        u.`id` AS userId,
+        u.`realname`,
+        'A' AS taskType
+        FROM
+        ACT_RU_TASK RES1
+        INNER JOIN ACT_RE_PROCDEF D ON RES1.PROC_DEF_ID_ = D.ID_
+        INNER JOIN `business_shenqing` s ON RES1.PROC_INST_ID_ = s.`processinstance_id`
+        INNER JOIN sys_depart de ON de.id = s.dept_id
+        <if test="emergency_level != null and emergency_level != ''">
+            AND s.`emergency_level` = #{emergency_level}
+        </if>
+        INNER JOIN SYS_USER u ON s.`business_sq_userid` = u.`id`
+        AND u.`del_flag` = 0
+        WHERE
+        RES1.ASSIGNEE_ = #{id}
+
+       <!-- <if test="deptId != null and deptId != '' and parentDetId != null and parentDetId != ''">
+            AND ( s.dept_id = #{deptId}
+            OR s.parent_dept_id = '00010001')
+        </if>
+        <if test="deptId != null and deptId != ''">
+            AND s.dept_id = #{deptId}
+        </if>-->
+
+        <choose>
+            <when test="deptId != null and deptId != '' and parentDetId != null and parentDetId != ''">
+                AND ( s.dept_id = #{deptId}
+                OR s.parent_dept_id = #{parentDetId} )
+            </when>
+            <otherwise>
+                AND s.dept_id = #{deptId}
+            </otherwise>
+        </choose>
+
+        <if test="realname != null and realname != ''">AND u.`realname` = #{realname}</if>
+        UNION ALL
+        #多人任务、组任务
+        SELECT DISTINCT
+        RES1.id_ AS taskId,
+        RES1.CREATE_TIME_,
+        s.id AS applyId,
+        s.`business_status` AS taskStaus,
+        s.`business_sqtime` AS taskTime,
+        s.`business_name` AS taskName,
+        s.`business_form_data_id` AS formDataId,
+        s.`emergency_level`,
+        s.`sq_id` as sqId,
+        s.work_id as workId,
+        s.dept_id AS deptId,
+        de.depart_name AS deptName,
+        s.parent_dept_id AS parentDeptId,
+        u.`id` AS userId,
+        u.`realname`,
+        'C' AS taskType
+        FROM
+        ACT_RU_TASK RES1
+        INNER JOIN ACT_RE_PROCDEF D ON RES1.PROC_DEF_ID_ = D.ID_
+        INNER JOIN `business_shenqing` s ON RES1.PROC_INST_ID_ = s.`processinstance_id`
+        INNER JOIN sys_depart de ON de.id = s.dept_id
+        <if test="emergency_level != null and emergency_level != ''">
+            AND s.`emergency_level` = #{emergency_level}
+        </if>
+        INNER JOIN SYS_USER u ON s.`business_sq_userid` = u.`id`
+        AND u.`del_flag` = 0
+        LEFT JOIN ACT_RU_IDENTITYLINK I ON I.TASK_ID_ = RES1.ID_
+        WHERE
+        RES1.ASSIGNEE_ IS NULL
+        AND I.TYPE_ = 'candidate'
+        AND (
+        I.USER_ID_ = #{id}
+        <choose>
+            <when test="deptId != null and deptId != '' and parentDetId != null and parentDetId != ''">
+                AND ( s.dept_id = #{deptId}
+                OR s.parent_dept_id = #{parentDetId} )
+            </when>
+            <otherwise>
+                AND s.dept_id = #{deptId}
+            </otherwise>
+        </choose>
+        OR I.GROUP_ID_ IN (
+        SELECT
+        aig.id_
+        FROM
+        act_id_user aiu
+        INNER JOIN act_id_membership aim ON aiu.id_ = #{id}
+        AND aiu.id_ = aim.user_id_
+        INNER JOIN act_id_group aig ON aig.id_ = aim.group_id_
+        )
+        )
+        ) AS t
+        ORDER BY
+        t.CREATE_TIME_ DESC
+        ) k
+
+    </select>
+
+    <!-- 我的任务 -->
+    <select id="workList" parameterType="String" resultType="com.zs.create.modules.workflow.vo.BpmnWork">
+        SELECT
+        t.taskId,
+        t.applyId,
+        t.taskStaus,
+        t.taskTime,
+        t.taskName,
+        t.formDataId,
+        t.userId,
+        t.sqId,
+        t.workId,
+        t.deptName,
+        t.realName,
+        t.taskType
+        FROM
+        (
+        #个人任务
+        SELECT DISTINCT
+        RES1.id_ AS taskId,
+        RES1.CREATE_TIME_,
+        s.id AS applyId,
+        s.`business_status` AS taskStaus,
+        s.`business_sqtime` AS taskTime,
+        s.`business_name` AS taskName,
+        s.`business_form_data_id` AS formDataId,
+        s.`emergency_level`,
+        s.`sq_id` as sqId,
+        s.work_id as workId,
+        s.dept_id AS deptId,
+        de.depart_name AS deptName,
+        s.parent_dept_id AS parentDeptId,
+        u.`id` AS userId,
+        u.`realname`,
+        'A' AS taskType
+        FROM
+        ACT_RU_TASK RES1
+        INNER JOIN ACT_RE_PROCDEF D ON RES1.PROC_DEF_ID_ = D.ID_
+        INNER JOIN `business_shenqing` s ON RES1.PROC_INST_ID_ = s.`processinstance_id`
+        INNER JOIN sys_depart de ON de.id = s.dept_id
+        <if test="emergency_level != null and emergency_level != ''">
+            AND s.`emergency_level` = #{emergency_level}
+        </if>
+        INNER JOIN SYS_USER u ON s.`business_sq_userid` = u.`id`
+        AND u.`del_flag` = 0
+        WHERE
+        RES1.ASSIGNEE_ = #{id}
+
+        <choose>
+            <when test="deptId != null and deptId != '' and parentDetId != null and parentDetId != ''">
+                AND ( s.dept_id = #{deptId}
+                OR s.parent_dept_id = #{parentDetId} )
+            </when>
+            <otherwise>
+                AND s.dept_id = #{deptId}
+            </otherwise>
+        </choose>
+
+        <if test="realname != null and realname != ''">AND u.`realname` = #{realname}</if>
+        UNION ALL
+        #多人任务、组任务
+        SELECT DISTINCT
+        RES1.id_ AS taskId,
+        RES1.CREATE_TIME_,
+        s.id AS applyId,
+        s.`business_status` AS taskStaus,
+        s.`business_sqtime` AS taskTime,
+        s.`business_name` AS taskName,
+        s.`business_form_data_id` AS formDataId,
+        s.`emergency_level`,
+        s.`sq_id` as sqId,
+        s.work_id as workId,
+        s.dept_id AS deptId,
+        de.depart_name AS deptName,
+        s.parent_dept_id AS parentDeptId,
+        u.`id` AS userId,
+        u.`realname`,
+        'C' AS taskType
+        FROM
+        ACT_RU_TASK RES1
+        INNER JOIN ACT_RE_PROCDEF D ON RES1.PROC_DEF_ID_ = D.ID_
+        INNER JOIN `business_shenqing` s ON RES1.PROC_INST_ID_ = s.`processinstance_id`
+        INNER JOIN sys_depart de ON de.id = s.dept_id
+        <if test="emergency_level != null and emergency_level != ''">
+            AND s.`emergency_level` = #{emergency_level}
+        </if>
+        INNER JOIN SYS_USER u ON s.`business_sq_userid` = u.`id`
+        AND u.`del_flag` = 0
+        LEFT JOIN ACT_RU_IDENTITYLINK I ON I.TASK_ID_ = RES1.ID_
+        WHERE
+        RES1.ASSIGNEE_ IS NULL
+        AND I.TYPE_ = 'candidate'
+        AND (
+        I.USER_ID_ = #{id}
+        <choose>
+            <when test="deptId != null and deptId != '' and parentDetId != null and parentDetId != ''">
+                AND ( s.dept_id = #{deptId}
+                OR s.parent_dept_id = #{parentDetId} )
+            </when>
+            <otherwise>
+                AND s.dept_id = #{deptId}
+            </otherwise>
+        </choose>
+        OR I.GROUP_ID_ IN (
+        SELECT
+        aig.id_
+        FROM
+        act_id_user aiu
+        INNER JOIN act_id_membership aim ON aiu.id_ = #{id}
+        AND aiu.id_ = aim.user_id_
+        INNER JOIN act_id_group aig ON aig.id_ = aim.group_id_
+        )
+        )
+        ) AS t
+        ORDER BY
+        t.CREATE_TIME_ DESC
+
+
+    </select>
+
+    <select id="selectBySqId" parameterType="string" resultType="com.zs.create.modules.workflow.vo.BusinessShenqing">
+        select * from `business_shenqing` where sq_id = #{sqId}
+    </select>
+
+</mapper>

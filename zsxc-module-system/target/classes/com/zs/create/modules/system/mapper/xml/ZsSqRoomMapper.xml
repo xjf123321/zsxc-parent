@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqRoomMapper">
+
+    <!-- 根据部门id查询申请 待审批 -->
+    <select id="meettingApplyCount" parameterType="String" resultType="Long">
+          select count(1) as num from (SELECT
+        r.id AS id,
+        r.username,
+        r.`status` as status,
+        r.meetting_title as meettingTitle,
+        r.meetting_host as meettingHost,
+        r.emergency_level AS emergencyLevel,
+        r.applyer_dept AS applyer_dept,
+        r.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_room r
+          LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+          WHERE r.del_flag = '0' AND  r.applyer_dept = #{deptId} AND r.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND r.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND r.meetting_title LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+          ) k
+    </select>
+
+    <!-- 根据部门id查询申请 待审批-->
+    <select id="meettingApplyList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqRoom">
+        SELECT
+          r.id AS id,
+          r.user_id,
+          r.username,
+          r.`status` as status,
+          r.meetting_title as meettingTitle,
+          r.meetting_start AS meettingStart,
+          r.meetting_end AS meettingEnd,
+          r.meetting_type AS meettingType,
+          r.meetting_host as meettingHost,
+          r.emergency_level AS emergencyLevel,
+          r.applyer_dept AS applyer_dept,
+          r.create_time AS createTime,
+          z.room_name AS meettingRoomName,
+          d.depart_name AS applyerDept
+        FROM zs_sq_room r
+        LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+        JOIN zs_basic_room z on z.id = r.meetting_room_name
+        WHERE r.del_flag = '0' AND  r.applyer_dept = #{deptId} AND r.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND r.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND r.meetting_title LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="roomAdminCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+          r.id AS id,
+          r.username,
+          r.`status` as status,
+          r.meetting_title as meettingTitle,
+          r.meetting_host as meettingHost,
+          r.emergency_level AS emergencyLevel,
+          r.applyer_dept AS applyer_dept,
+          r.create_time AS createTime,
+          d.depart_name AS applyerDept
+          FROM zs_sq_room r
+          LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+          WHERE r.del_flag = '0' AND r.status in ('2','7','6')
+        <if test="username!=null and username!=''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+          ) k
+    </select>
+
+    <select id="roomAdminList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqRoom">
+        SELECT
+          r.id AS id,
+          r.username,
+          r.`status` as status,
+          r.meetting_title as meettingTitle,
+          r.meetting_start AS meettingStart,
+          r.meetting_end AS meettingEnd,
+          r.meetting_type AS meettingType,
+          r.meetting_host as meettingHost,
+          r.emergency_level AS emergencyLevel,
+          r.applyer_dept AS applyer_dept,
+          r.create_time AS createTime,
+          z.room_name AS roomName,
+          r.meetting_room_name AS meettingRoomName,
+          d.depart_name AS applyerDept
+        FROM zs_sq_room r
+        LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+        JOIN zs_basic_room z on z.id = r.meetting_room_name
+        WHERE r.del_flag = '0' AND r.status in ('2','7','6')
+        <if test="username != null and username != ''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER by r.create_time DESC
+    </select>
+
+    <select id="allowListCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        r.id AS id,
+        r.username,
+        r.`status` as status,
+        r.emergency_level AS emergencyLevel,
+        r.applyer_dept AS applyer_dept,
+        r.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_room r
+        LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+        LEFT JOIN zs_meetting_guocheng g ON r.id = g.meetting_id
+        WHERE  r.del_flag = '0' AND g.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        GROUP by id
+        ) k
+    </select>
+
+    <select id="allowList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqRoom">
+        SELECT
+        r.id AS id,
+        r.username,
+        r.`status` as status,
+        r.emergency_level AS emergencyLevel,
+        r.meetting_title as meettingTitle,
+        r.meetting_start AS meettingStart,
+        r.meetting_end AS meettingEnd,
+        r.meetting_type AS meettingType,
+        r.meetting_host as meettingHost,
+        r.applyer_dept AS applyer_dept,
+        r.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM zs_sq_room r
+        LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+        LEFT JOIN zs_meetting_guocheng g ON r.id = g.meetting_id
+        WHERE  r.del_flag = '0' AND g.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND r.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        GROUP BY id
+        ORDER BY r.create_time DESC
+    </select>
+
+    <update id="updateMeettingEnd">
+        update zs_sq_room set meetting_end = #{meettingEnd} where id = #{id}
+    </update>
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqRoom">
+        select
+          r.id AS id,
+          r.username,
+          r.`status` as status,
+          r.meetting_title as meettingTitle,
+          r.meetting_start AS meettingStart,
+          r.meetting_end AS meettingEnd,
+          r.meetting_type AS meettingType,
+          r.meetting_host as meettingHost,
+          r.emergency_level AS emergencyLevel,
+          r.applyer_dept AS applyer_dept,
+          r.create_time AS createTime,
+          b.room_name AS meettingRoomName,
+          r.conference_slogan AS conferenceSlogan,
+          r.description AS description,
+          r.remarks AS remarks
+        from zs_sq_room r
+        LEFT JOIN zs_basic_room b ON b.id = r.meetting_room_name
+        where r.id = #{id}
+    </select>
+
+    <select id="selectRoomName" parameterType="string" resultType="string">
+        select meetting_room_name from zs_sq_room where id = #{id}
+    </select>
+    
+    <update id="cancel" parameterType="string">
+        update zs_sq_room set status = '3' where id = #{id}
+    </update>
+
+    <select id="count" parameterType="string" resultType="java.lang.Long">
+        select count(1) from zs_sq_room where del_flag = '0'
+        <if test="meettingHost != null and meettingHost != ''">
+            AND meetting_host like CONCAT('%',#{meettingHost},'%')
+        </if>
+        AND status in ('2','6','7')
+    </select>
+
+    <select id="queryCollectList" resultType="com.zs.create.modules.system.vo.ZsSqRoomVo">
+        select * from zs_sq_room
+        where status in ('2','6','7')
+        <if test="meettingHost != null and meettingHost != ''">
+            AND meetting_host like CONCAT('%',#{meetting_host},'%')
+        </if>
+        AND del_flag = '0'
+        order by create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+    
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_room set status = #{status} where id = #{id}
+    </update>
+
+    <select id="roomCount" parameterType="string" resultType="long">
+        select COUNT(1) FROM zs_sq_room WHERE user_id = #{userId} AND del_flag = '0'
+    </select>
+
+    <update id="deleteAttachment" parameterType="string">
+        uupdate zs_sq_room set url = null  where id = #{id}
+    </update>
+
+    <select id="findById" parameterType="string" resultType="com.zs.create.modules.system.vo.ZsSqRoomVo">
+        select id,user_id,username,meetting_type,meetting_title,conference_slogan,meetting_start,meetting_end,meetting_host,
+        meetting_name,meetting_room_name,remarks,status,approval_column,approval_opinion,url,description,create_time,del_flag,
+        emergency_level,apply_type,applyer_dept
+        from zs_sq_room
+        where id = #{id}
+    </select>
+
+    <select id="done" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        r.id AS id,
+        r.status AS status,
+        r.username AS applyer,
+        r.apply_type As type,
+        r.create_time AS createTime
+        FROM zs_sq_room r
+        LEFT JOIN sys_depart d ON d.id = r.applyer_dept
+        LEFT JOIN zs_meetting_guocheng g ON r.id = g.meetting_id
+        WHERE  r.del_flag = '0' AND g.user_id = #{userId}
+        GROUP BY r.id
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectBy" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        z.id AS id,
+        z.status AS status,
+        z.username AS applyer,
+        z.apply_type As type,
+        z.create_time AS createTime
+        FROM
+        zs_sq_room z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_meetting_guocheng c ON c.meetting_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND z.id = #{id}
+        GROUP BY z.id
+    </select>
+
+</mapper>

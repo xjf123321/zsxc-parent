@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqLeaveMapper">
+
+    <!-- 根据部门id查询申请 待审批 -->
+    <select id="leaveApplyCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODQ1MjUxNjAsInVzZXJuYW1lIjoieWFvY2hhbyJ9.VcFOf0vO7xQfR8G0ARbQDAtcNijNz9jRNqXNLNoFQYs
+        z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.number AS number
+            FROM zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0'  AND z.current_dept = #{deptId} AND z.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND z.leave_absence LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ) k
+
+    </select>
+
+    <!-- 根据部门id查询申请 待审批-->
+    <select id="leaveApplyList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        z.id AS id,
+        z.username,
+        z.`status` AS status,
+        z.type AS type,
+        z.start_date AS startDate,
+        z.end_date AS endDate,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.number AS number
+            FROM zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.current_dept = #{deptId} AND z.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND z.leave_absence LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="vehicleOfficerCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.number AS number
+            FROM zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status = '3'
+        ) k
+
+    </select>
+
+    <select id="vehicleOfficerList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        z.id AS id,z.username,
+        z.`status` AS status,
+        z.type AS type,
+        z.start_date AS startDate,
+        z.end_date AS endDate,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.number AS numberleaveApplyCount
+            FROM zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status = '3'
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_leave set `status` = #{status} where id = #{id}
+    </update>
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        select * from zs_sq_leave where id = #{id}
+    </select>
+
+    <!--请假已办事项 count-->
+    <select id="haveDoneCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,
+        z.`status` AS STATUS,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.number AS number,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM
+        zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_leave_guocheng c ON c.leave_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND c.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        AND z.status in ('1','2','3','4')
+        GROUP BY id
+        ) k
+
+    </select>
+
+    <!--请假已办事项 list-->
+    <select id="haveDoneList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        z.id AS id,
+        z.username,
+        z.`status` AS STATUS,
+        z.type AS type,
+        z.start_date AS startDate,
+        z.end_date AS endDate,
+        z.emergency_level AS emergencyLevel,
+        z.leave_absence AS leaveAbsence,
+        z.number AS number,
+        z.applyer_dept AS applyer_dept,
+        z.create_time AS createTime,
+        d.depart_name AS applyerDept
+        FROM
+        zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_leave_guocheng c ON c.leave_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND c.user_id = #{userId}
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+
+        GROUP BY id
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="queryZsSqLeaveCount" resultType="java.lang.Long">
+        select count(1) from zs_sq_leave where del_flag = '0' AND user_id = #{userId}
+        <if test="startDate != null and endDate != null">
+            AND start_date &gt;=  #{startDate} AND end_date &lt;= #{endDate}
+        </if>
+        <if test="startDate != null">
+            AND start_date &gt;=  #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND end_date &lt;=  #{endDate}
+        </if>
+    </select>
+
+    <select id="queryZsSqLeave" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        select * from zs_sq_leave where del_flag = '0' AND user_id = #{userId}
+        <if test="startDate != null and endDate != null">
+            AND start_date &gt;=  #{startDate} AND end_date &lt;= #{endDate}
+        </if>
+        <if test="startDate != null">
+            AND start_date &gt;=  #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND end_date &lt;=  #{endDate}
+        </if>
+        order by create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <select id="findList" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        id,user_id,username,type,start_date,end_date,leave_address,number,telephone,signal_address,leave_absence,
+        remarks,status,approval_column,approval_opinion,person_status,create_time,emergency_level
+        FROM zs_sq_leave
+        WHERE user_id = #{userId} AND del_flag = '0'
+        <if test="zsSqLeave.startDate != null and zsSqLeave.endDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate} AND end_date &lt;= #{zsSqLeave.endDate}
+        </if>
+        <if test="zsSqLeave.startDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate}
+        </if>
+        <if test="zsSqLeave.endDate != null">
+            AND end_date &lt;=  #{zsSqLeave.endDate}
+        </if>
+        order by create_time desc
+    </select>
+
+    <insert id="add" parameterType="com.zs.create.modules.system.entity.ZsSqLeave">
+        INSERT INTO zs_sq_leave (
+        id,user_id,username,type,start_date,end_date,leave_address,number,telephone,signal_address,leave_absence,
+        remarks,status,create_time,del_flag,emergency_level,apply_type,applyer_dept)
+        VALUES (#{id},#{userId},#{username},#{type},#{startDate},#{endDate},#{leaveAddress},#{number},#{telephone},
+        #{signalAddress},#{leaveAbsence},#{remarks},#{status},#{createTime},#{delFlag},#{emergencyLevel},#{applyType},#{applyerDept}
+        )
+    </insert>
+
+    <select id="needDoList" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        l.id AS id,
+        l.user_id AS userId,
+        l.username as username,
+        l.create_time as createTime,
+        l.leave_absence AS leaveAbsence,
+        l.number AS number,
+        l.type as TYPE ,
+        l.start_date as startDate,
+        l.end_date AS endDate,
+        d.depart_name as applyerDept,
+        l.status as status
+        FROM zs_sq_leave l
+        LEFT JOIN zs_leave_guocheng g ON l.id = g.leave_id
+        JOIN sys_depart d ON d.id = l.applyer_dept
+        WHERE g.number = g.flag AND g.state = '0' AND g.approval_person = #{userId} AND l.del_flag = '0'
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND l.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND l.leave_absence LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND l.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY l.create_time DESC
+    </select>
+
+    <select id="findById" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        select
+        id,user_id,username,type,start_date,end_date,leave_address,number,telephone,signal_address,leave_absence,
+        remarks,status,approval_column,approval_opinion,person_status,create_time,del_flag,emergency_level,apply_type,applyer_dept
+        from zs_sq_leave where id = #{id}
+    </select>
+
+    <select id="doneList" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        l.id AS id,
+        l.username as username,
+        l.create_time as createTime,
+        l.leave_absence AS leaveAbsence,
+        l.number AS number,
+        d.depart_name as applyerDept,
+        l.status as status
+        FROM zs_sq_leave l
+        LEFT JOIN zs_leave_guocheng g ON l.id = g.leave_id
+        JOIN sys_depart d ON d.id = l.applyer_dept
+        WHERE  g.state IN ('1','2') AND g.approval_person = #{userId} AND l.del_flag = '0'
+        <if test="username!=null and username!=''">
+            AND l.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        GROUP BY l.id
+        ORDER BY l.create_time DESC
+
+    </select>
+
+    <!-- 请假管理人事列表List -->
+    <select id="leaveList" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+            l.id AS id,
+            l.username AS username,
+            l.create_time AS createTime,
+            l.leave_absence AS leaveAbsence,
+            l.number AS number,
+            d.depart_name AS applyerDept,
+            l. STATUS AS STATUS,
+            l.start_date AS startDate,
+            l.end_date AS endDate,
+            l.type as type
+        FROM
+	        zs_sq_leave l
+        JOIN sys_depart d ON d.id = l.applyer_dept
+        WHERE
+	        l.del_flag = '0'
+        AND l.`status` = '1'
+        <if test="zsSqLeave.startDate != null and zsSqLeave.endDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate} AND end_date &lt;= #{zsSqLeave.endDate}
+        </if>
+        <if test="zsSqLeave.startDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate}
+        </if>
+        <if test="zsSqLeave.endDate != null">
+            AND end_date &lt;=  #{zsSqLeave.endDate}
+        </if>
+        <if test="zsSqLeave.username != null and zsSqLeave.username != ''">
+            AND username = #{zsSqLeave.username}
+        </if>
+        <if test="zsSqLeave.applyerDept != null and zsSqLeave.applyerDept != ''">
+            AND applyer_dept = #{zsSqLeave.applyerDept}
+        </if>
+        ORDER BY
+	        l.create_time DESC
+    </select>
+
+    <update id="updateZsLeave" parameterType="com.zs.create.modules.system.entity.ZsSqLeave">
+        UPDATE zs_sq_leave SET
+        type = #{type},start_date = #{startDate},end_date =#{endDate},leave_address = #{leaveAddress},
+        number = #{number},telephone = #{telephone},signal_address = #{signalAddress},leave_absence =#{leaveAbsence},
+        status = #{status},person_status = #{personStatus},create_time = #{createTime},del_flag = #{delFlag},
+        emergency_level = #{emergencyLevel},remarks = #{remarks}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findAll" parameterType="com.zs.create.modules.system.entity.ZsSqLeave" resultType="com.zs.create.modules.system.entity.ZsSqLeave">
+        SELECT
+        id,
+        user_id,
+        username,
+        type,
+        start_date,
+        end_date,
+        leave_address,
+        number,
+        telephone,
+        signal_address,
+        leave_absence,
+        remarks,
+        status,
+        approval_column,
+        approval_opinion,
+        person_status,
+        create_time,
+        emergency_level
+        FROM zs_sq_leave WHERE status = '1' AND del_flag = '0'
+        <if test="zsSqLeave.startDate != null and zsSqLeave.endDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate} AND end_date &lt;= #{zsSqLeave.endDate}
+        </if>
+        <if test="zsSqLeave.startDate != null">
+            AND start_date &gt;=  #{zsSqLeave.startDate}
+        </if>
+        <if test="zsSqLeave.endDate != null">
+            AND end_date &lt;=  #{zsSqLeave.endDate}
+        </if>
+        <if test="zsSqLeave.username != null and zsSqLeave.username != ''">
+            AND username = #{zsSqLeave.username}
+        </if>
+        <if test="zsSqLeave.applyerDept != null and zsSqLeave.applyerDept != ''">
+            AND applyer_dept = #{zsSqLeave.applyerDept}
+        </if>
+    </select>
+
+    <select id="leaveCount" parameterType="string" resultType="long">
+        SELECT COUNT(1) FROM zs_sq_leave WHERE user_id = #{userId} AND del_flag = '0'
+    </select>
+
+    <select id="done" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        z.id AS id,
+        z.status AS status,
+        z.username AS applyer,
+        z.apply_type AS type,
+        z.create_time AS createTime
+        FROM
+        zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_leave_guocheng c ON c.leave_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND c.user_id = #{userId}
+        GROUP BY z.id
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="selectBy" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        z.id AS id,
+        z.status AS status,
+        z.username AS applyer,
+        z.apply_type AS type,
+        z.create_time AS createTime
+        FROM
+        zs_sq_leave z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_leave_guocheng c ON c.leave_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND z.id = #{id}
+        GROUP BY z.id
+    </select>
+
+</mapper>

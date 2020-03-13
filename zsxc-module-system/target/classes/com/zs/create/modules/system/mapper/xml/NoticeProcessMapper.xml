@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.NoticeProcessMapper">
+
+    <select id="selectId" parameterType="string" resultType="string">
+        select
+        a.doc_id
+        from
+        notice_process a
+        left join
+        zs_sq_notice b
+        on
+        a.doc_id = b.id
+        where
+        a.approval_person = #{approvalPerson}
+        AND a.approval_status = '0'
+        <if test="emergencyLevel != null and emergencyLevel != ''">
+            AND a.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title != null and title != ''">
+            AND b.title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username !=null and username !=''">
+            AND b.username like concat(concat("%",#{username}),"%")
+        </if>
+    </select>
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.NoticeProcess">
+        select * from notice_process where doc_id = #{docId} AND approval_status in ('1','2')
+        order by create_time asc
+    </select>
+
+    <select id="selectStatus" parameterType="string" resultType="string">
+        select approval_status from notice_process where doc_id = #{doc_id} AND approval_status in ('0','1','2')
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update notice_process set approval_status = #{approvalStatus} WHERE doc_id = #{docId} AND approval_person = #{approvalPerson}
+    </update>
+
+    <update id="updateNoticeProcessStatus" parameterType="string">
+        update notice_process set approval_status = '1',play_name = #{playName},approval_opinion = #{approvalOpinion},user_name = #{userName},autograph = #{autograph} where doc_id = #{docId} AND approval_person = #{approvalPerson}
+    </update>
+
+    <update id="updateNotNoticeProcessStatus" parameterType="string">
+        update notice_process set approval_status = '2',play_name = #{playName},approval_opinion = #{approvalOpinion},user_name = #{userName} where doc_id = #{docId} AND approval_person = #{approvalPerson}
+    </update>
+
+    <select id="haveDoneCount" parameterType="string" resultType="java.lang.Long">
+        select count(1) from notice_process where approval_person = #{approvalPerson}
+        AND approval_status in ('1','2')
+        <if test="username != null and username != ''">
+            AND user_name like concat(concat("%",#{username}),"%")
+        </if>
+    </select>
+
+    <update id="updateNoticeProcess" parameterType="string">
+        update notice_process set approval_status = '1',play_name = #{playName},approval_opinion = #{approvalOpinion},autograph = #{autograph} where doc_id = #{docId} AND approval_person = #{approvalPerson}
+    </update>
+
+</mapper>

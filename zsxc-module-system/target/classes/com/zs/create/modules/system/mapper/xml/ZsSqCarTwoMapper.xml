@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqCarTwoMapper">
+
+    <select id="queryLeaderCar" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT a.id AS id,
+        a.user_id,
+        a.username,
+        a.`status` AS status,
+        a.emergency_level AS emergencyLevel,
+        a.reason AS reason,
+        a.applyer_dept AS applyer_dept,
+        a.create_time AS createTime,
+        d.depart_name AS applyerDept,
+        a.plate_number AS plateNumber
+        FROM zs_sq_car a
+        LEFT JOIN sys_depart d ON d.id = a.applyer_dept
+        LEFT JOIN zs_car_guocheng b ON a.id = b.car_id
+        WHERE b.number = b.flag AND b.state = '0' AND b.approval_person = #{approvalPerson} AND a.del_flag = '0'
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND a.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND a.reason LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND a.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY a.create_time DESC
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_car set status = #{status} where id = #{id}
+    </update>
+
+    <select id="selectPlateNumber" parameterType="string" resultType="string">
+        select plate_number from zs_sq_car where id = #{id}
+    </select>
+
+    <select id="findList" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT
+        id,user_id,username,applyer_dept,number,party,plate_number,out_date,in_date,start_place,end_place,
+        use_dept,reason,remarks,approval_column,approval_opinion,del_flag,status,create_time,emergency_level,apply_type
+        FROM zs_sq_car
+        WHERE user_id = #{userId} AND del_flag = '0'
+        order by create_time desc
+    </select>
+
+    <update id="updateCar" parameterType="com.zs.create.modules.system.entity.ZsSqCar">
+        update zs_sq_car set
+        number = #{number},
+        party = #{party},
+        plate_number = #{plateNumber},
+        out_date = #{outDate},
+        in_date = #{inDate},
+        start_place = #{startPlace},
+        end_place = #{endPlace},
+        use_dept = #{useDept},
+        reason = #{reason},
+        remarks = #{remarks},
+        approval_column = #{approvalColumn},
+        approval_opinion #{approvalOpinion},
+        status = #{status},
+        create_time = #{createTime},
+        emergency_level = #{emergencyLevel}
+        where id = #{id}
+    </update>
+
+    <select id="selectCar" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select * from zs_sq_car where id = #{id}
+    </select>
+
+    <select id="selectEmergencyLevel" parameterType="string" resultType="string">
+        select emergency_level from zs_sq_car where id = #{id}
+    </select>
+
+</mapper>

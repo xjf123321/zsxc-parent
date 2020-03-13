@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zs.create.modules.system.mapper.IndexCountMapper">
+
+    <select id="queryDone" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        select
+        a.id AS id,
+        a.username AS applyer,
+        a.status AS status,
+        a.create_time AS createTime,
+        a.apply_type AS type
+        from zs_sq_car a where user_id = #{id} and a.status in ('1','2','3','4')
+        UNION All
+        select
+        b.id AS id,
+        b.username AS applyer,
+        b.status AS status,
+        b.create_time AS createTime,
+        b.apply_type AS type
+        from zs_sq_room b where user_id = #{id} and b.status in ('2','3','4','5','6','7')
+        UNION All
+        select
+        c.id AS id,
+        c.username AS applyer,
+        c.status AS status,
+        c.create_time AS createTime,
+        c.apply_type AS type
+        from zs_sq_leave c where user_id = #{id} and c.status in ('1','2')
+    </select>
+
+    <select id="query" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        select
+        a.id AS id,
+        a.username AS applyer,
+        a.status AS status,
+        a.create_time AS createTime,
+        a.apply_type AS type,
+        a.title AS title
+        from zs_doc_record a where user_id = #{id} and a.status in ('1','2')
+        UNION All
+        select
+        b.id AS id,
+        b.username AS applyer,
+        b.status AS status,
+        b.create_time AS createTime,
+        b.apply_type AS type,
+        b.title AS title
+        from zs_sq_notice b where user_id = #{id} and b.status in ('1','2')
+    </select>
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.zdemo.mapper.DemoMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.zs.create.modules.zdemo.entity.DemoEntity" id="demoMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="keyWord" column="key_word"/>
+        <result property="punchTime" column="punch_time"/>
+        <result property="salaryMoney" column="salary_money"/>
+        <result property="bonusMoney" column="bonus_money"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="birthday" column="birthday"/>
+        <result property="email" column="email"/>
+        <result property="content" column="content"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="sysOrgCode" column="sys_org_code"/>
+    </resultMap>
+
+</mapper>

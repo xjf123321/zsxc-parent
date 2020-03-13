@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqNoticeMapper">
+
+    <insert id="add" parameterType="com.zs.create.modules.system.entity.ZsSqNotice">
+        insert into zs_sq_notice (id,user_id,username,title,number,create_time,send_dept,receiver,receiver_name,receiver_dept,remarks,annex,send_state,del_flag,url,apply_type,emergency_level,status,applyer_dept,pdf_url)
+        VALUES
+        (#{id},#{userId},#{username},#{title},#{number},#{createTime},#{sendDept},#{receiver},#{receiverName},#{receiverDept},#{remarks},#{annex},#{sendState},#{delFlag},#{url},#{applyType},#{emergencyLevel},#{status},#{applyerDept},#{pdfUrl})
+    </insert>
+
+    <select id="select" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        select * from zs_sq_notice where del_flag = '0' AND id = #{id}
+    </select>
+
+    <select id="queryZsSqNoticeCount" parameterType="string" resultType="java.lang.Long">
+        select count(1) from zs_sq_notice where del_flag = '0' AND user_id = #{userId}
+    </select>
+
+    <select id="queryZsSqNotice" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT * FROM zs_sq_notice WHERE del_flag = '0' AND user_id = #{userId}
+        order by create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <select id="queryLeaderNoticeProcess" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT
+        a.id AS id,
+        a.user_id,
+        a.username,
+        a.STATUS AS STATUS,
+        a.send_state AS sendState,
+        a.title AS title,
+        a.emergency_level AS emergencyLevel,
+        a.applyer_dept AS applyer_dept,
+        a.create_time AS createTime,
+        b.depart_name AS applyerDept,
+        a.send_state AS sendState
+        FROM
+        zs_sq_notice a
+        LEFT JOIN sys_depart b ON b.id = a.applyer_dept
+        JOIN notice_process c ON a.user_id = c.applyer AND a.id = c.doc_id
+        WHERE
+        a.del_flag = '0'
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND a.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title != null and title != ''">
+            AND a.title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username !=null and username !=''">
+            AND a.username like concat(concat("%",#{username}),"%")
+        </if>
+        AND c.approval_person = #{approvalPerson} AND c.approval_status = '0' AND a.status = '0'
+        order by a.create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select count(1) from zs_sq_notice where send_state = 1
+        <if test="number != null and number != ''">
+            AND number like CONCAT('%',#{number},'%')
+        </if>
+        <if test="title != null and title != ''">
+            AND title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="timeStart != null and timeEnd != null">
+            AND create_time >= #{timeStart} AND #{timeEnd} >= create_time
+        </if>
+        AND del_flag = '0'
+    </select>
+
+    <select id="queryCollectList" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        select * from zs_sq_notice
+        where send_state = 1
+        AND receiver like CONCAT('%',#{receiver},'%')
+        <if test="number != null and number != ''">
+            AND number like CONCAT('%',#{number},'%')
+        </if>
+        <if test="title != null and title != ''">
+            AND title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="timeStart != null and timeEnd != null">
+            AND create_time >= #{timeStart} AND #{timeEnd} >= create_time
+        </if>
+        AND del_flag = '0'
+        order by create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT
+            a.id AS id,
+            a.user_id AS user_id,
+            a.username AS username,
+            a.title AS title,
+            a.number AS number,
+            a.create_time AS create_time,
+            a.send_dept AS send_dept,
+            a.receiver AS receiver,
+            a.receiver_name AS receiver_name,
+            a.receiver_dept AS receiver_dept,
+            a.remarks AS remarks,
+            a.annex AS annex,
+            a.send_state AS send_state,
+            z.url AS url,
+            a.apply_type AS arrly_dept,
+            a.emergency_level AS emergency_level,
+            a.STATUS AS STATUS,
+            a.applyer_dept AS applyer_dept,
+            a.pdf_url AS pdf,
+            a.look AS look
+        FROM
+            zs_sq_notice a
+            LEFT JOIN zs_returnpath z ON z.id = a.url
+        WHERE
+            a.id = #{id}
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_notice set status = #{status} where id = #{docId}
+    </update>
+
+    <update id="release" parameterType="string">
+        update zs_sq_notice set send_state = 1 where id = #{id}
+    </update>
+
+    <select id="haveDoneList" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT
+        a.id AS id,
+        a.username,
+        a.status AS STATUS,
+        a.title AS title,
+        a.applyer_dept AS applyer_dept,
+        a.create_time AS createTime,
+        b.depart_name AS applyerDept
+        FROM
+        zs_sq_notice a
+        LEFT JOIN sys_depart b ON b.id = a.applyer_dept
+        JOIN notice_process c ON a.user_id = c.applyer AND a.id = c.doc_id
+        WHERE
+        a.del_flag = '0'
+        AND c.approval_person = #{approvalPerson}
+        AND c.approval_status in ('1','2')
+        <if test="username != null and username != ''">
+            AND a.username like concat(concat("%",#{username}),"%")
+        </if>
+        order by a.create_time desc
+    </select>
+
+    <update id="updateDelFlag" parameterType="string">
+        update zs_sq_notice set del_flag = '1' where id = #{id}
+    </update>
+
+    <select id="findAllByStatus"  parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT
+        id,title,create_time,emergency_level,receiver_name,number,remarks
+        FROM zs_sq_notice
+        WHERE del_flag = '0' AND receiver LIKE concat(concat("%",#{id}),"%") AND status = '1'
+        order by create_time desc
+    </select>
+
+    <select id="padCollectList" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        select * from zs_sq_notice where receiver = #{receiver} AND del_flag = '0' AND send_state = '1'
+    </select>
+
+    <update id="updateReceiver" parameterType="string">
+         update zs_sq_notice set receiver = #{receiver},receiver_name = #{receiverName} where id = #{id}
+    </update>
+
+
+    <select id="noticeCont" parameterType="string" resultType="long">
+        SELECT COUNT(1) FROM zs_sq_notice WHERE user_id =#{userId} AND del_flag = '0'
+    </select>
+
+
+    <update id="updateSendState" parameterType="string">
+        update zs_sq_notice set send_state = #{sendState} where id = #{id}
+    </update>
+
+    <select id="noticeCont" parameterType="string" resultType="long">
+        SELECT COUNT(1) FROM zs_sq_notice WHERE user_id = #{userId} AND del_flag = '0'
+    </select>
+
+    <select id="findByUrl" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqNotice">
+        SELECT id from zs_sq_notice where url = #{url}
+    </select>
+
+    <select id="done" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        select
+        a.id AS id,
+        a.status AS status,
+        a.title AS title,
+        a.username AS applyer,
+        a.create_time AS createTime,
+        a.apply_type AS type
+        FROM
+        zs_sq_notice a
+        LEFT JOIN sys_depart b ON b.id = a.applyer_dept
+        JOIN notice_process c ON a.user_id = c.applyer AND a.id = c.doc_id
+        WHERE
+        a.del_flag = '0'
+        AND c.approval_person = #{approvalPerson}
+        AND c.approval_status in ('1','2')
+        order by a.create_time desc
+    </select>
+
+    <update id="look" parameterType="string">
+        update zs_sq_notice set look = #{look} where id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.ZsSqCarMapper">
+
+    <!-- 根据部门id查询申请 待审批 -->
+    <select id="carApplyCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,
+        z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.reason AS reason,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.plate_number AS plateNumber
+            FROM zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0'  AND z.applyer_dept = #{deptId} AND z.status = '0'
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND z.reason LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ) k
+
+    </select>
+
+    <!-- 根据部门id查询申请 待审批-->
+    <select id="carApplyList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT
+        z.id AS id,
+        z.username,
+        z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.reason AS reason,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.plate_number AS plateNumber
+            FROM zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.applyer_dept = #{deptId} AND z.status = #{state}
+        <if test="emergencyLevel!=null and emergencyLevel!=''">
+            AND z.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title!=null and title!=''">
+            AND z.reason LIKE concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="vehicleOfficerCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+        z.username,z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.reason AS reason,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.plate_number AS plateNumber
+            FROM zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status in ('1','3')
+        <if test="applyer!=null and applyer!=''">
+            AND z.username LIKE concat(concat("%",#{applyer}),"%")
+        </if>
+        ) k
+
+    </select>
+
+    <select id="vehicleOfficerList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT
+        z.id AS id,z.username,
+        z.`status` AS status,
+        z.emergency_level AS emergencyLevel,
+        z.reason AS reason,
+        z.applyer_dept AS applyer_dept,
+	    z.create_time AS createTime,
+	    d.depart_name AS applyerDept,
+	    z.plate_number as plateNumber
+        FROM zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        WHERE z.del_flag = '0' AND z.status in ('1','3')
+        <if test="applyer!=null and applyer!=''">
+            AND z.username LIKE concat(concat("%",#{applyer}),"%")
+        </if>
+        ORDER BY z.create_time DESC
+    </select>
+
+    <update id="updateStatus" parameterType="string">
+        update zs_sq_car set status = #{status} where id = #{id}
+    </update>
+
+    <select id="formShow" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select * from zs_sq_car where id = #{id}
+    </select>
+
+    <!--车辆已办事项 count-->
+    <select id="haveDoneCount" parameterType="String" resultType="long">
+        select count(1) as num from (SELECT
+        z.id AS id,
+            z.username,
+            z.`status` AS STATUS,
+            z.emergency_level AS emergencyLevel,
+            z.reason AS reason,
+            z.applyer_dept AS applyer_dept,
+            z.create_time AS createTime,
+            d.depart_name AS applyerDept,
+            z.plate_number AS plateNumber
+        FROM
+            zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_car_guocheng c ON c.car_id = z.id
+        WHERE
+            z.del_flag = '0'
+        AND c.approval_person = #{userId}
+        AND c.state in ('1','2')
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        GROUP BY id
+        ) k
+
+    </select>
+
+    <!--车辆已办事项 list-->
+    <select id="haveDoneList" parameterType="String" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT
+            z.id AS id,
+            z.username,
+            z.`status` AS STATUS,
+            z.emergency_level AS emergencyLevel,
+            z.reason AS reason,
+            z.applyer_dept AS applyer_dept,
+            z.create_time AS createTime,
+            d.depart_name AS applyerDept,
+            z.plate_number AS plateNumber
+        FROM
+            zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_car_guocheng c ON c.car_id = z.id
+        WHERE
+            z.del_flag = '0'
+        AND c.approval_person = #{userId}
+        <if test="username!=null and username!=''">
+            AND z.username LIKE concat(concat("%",#{username}),"%")
+        </if>
+        AND c.state in ('1','2')
+        GROUP BY z.id
+        ORDER BY z.create_time DESC
+    </select>
+
+    <update id="updateInDate">
+        update zs_sq_car set in_date = #{inDate},status = #{status} where id = #{id}
+    </update>
+
+    <select id="selectPlateNumber" parameterType="string" resultType="string">
+        select plate_number from zs_sq_car where id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.zs.create.modules.system.entity.ZsSqCar">
+        insert into zs_sq_car (id,user_id,username,applyer_dept,number,party,plate_number,out_date,in_date,start_place,end_place,use_dept,reason,remarks,approval_column,approval_opinion,del_flag,status,create_time,emergency_level,apply_type)
+        VALUES
+        (#{id},#{userId},#{username},#{applyerDept},#{number},#{party},#{plateNumber},#{outDate},#{inDate},#{startPlace},#{endPlace},#{useDept},#{reason},#{remarks},#{approvalColumn},#{approvalOpinion},#{delFlag},#{status},#{createTime},#{emergencyLevel},#{applyType})
+    </insert>
+
+    <select id="queryLeaderCar" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        SELECT
+        a.id AS id,
+        a.username,
+        a.STATUS AS STATUS,
+        a.title AS title,
+        a.doc_type AS docType,
+        a.emergency_level AS emergencyLevel,
+        a.applyer_dept AS applyer_dept,
+        a.create_time AS createTime,
+        b.depart_name AS applyerDept
+        FROM
+        zs_sq_car a
+        LEFT JOIN sys_depart b ON b.id = a.applyer_dept
+        JOIN zs_car_guocheng c ON a.id = c.car_id
+        WHERE
+        a.del_flag = '0'
+        <if test="emergencyLevel != null and emergencyLevel != ''">
+            AND a.emergency_level = #{emergencyLevel}
+        </if>
+        <if test="title != null and title != ''">
+            AND a.title like concat(concat("%",#{title}),"%")
+        </if>
+        <if test="username != null and username != ''">
+            AND a.username like concat(concat("%",#{username}),"%")
+        </if>
+        AND c.approval_person = #{approvalPerson}
+        AND c.state = '0'
+        AND a.status = '0'
+        AND c.number = c.flag
+        order by a.create_time desc
+        limit #{firstIndex},#{lastIndex}
+    </select>
+
+    <select id="selectCar" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select * from zs_sq_car where id = #{id}
+    </select>
+
+    <select id="findById" parameterType="string" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select
+        id,plate_number
+        from zs_sq_car where id = #{id}
+    </select>
+
+    <update id="updateFlag" parameterType="string">
+        update zs_sq_car set del_flag = '1' where id = #{id}
+    </update>
+
+    <select id="carCount" parameterType="string" resultType="long" >
+        SELECT COUNT(1) FROM zs_sq_car WHERE user_id = #{userId} AND del_flag = '0'
+    </select>
+
+    <select id="done" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        z.id AS id,
+        z.status AS status,
+        z.username AS applyer,
+        z.apply_type As type,
+        z.create_time AS createTime
+        FROM
+        zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_car_guocheng c ON c.car_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND c.approval_person = #{userId}
+        AND c.state in ('1','2')
+        GROUP BY z.id
+        ORDER BY z.create_time DESC
+    </select>
+
+    <select id="select" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select *
+        from zs_sq_car
+    </select>
+
+    <select id="selectAll" resultType="com.zs.create.modules.system.entity.ZsSqCar">
+        select *
+        from zs_sq_car where status in ('0','1','3')
+    </select>
+
+    <select id="selectBy" parameterType="string" resultType="com.zs.create.modules.system.entity.Done">
+        SELECT
+        z.id AS id,
+        z.status AS status,
+        z.username AS applyer,
+        z.apply_type As type,
+        z.create_time AS createTime
+        FROM
+        zs_sq_car z
+        LEFT JOIN sys_depart d ON d.id = z.applyer_dept
+        JOIN zs_car_guocheng c ON c.car_id = z.id
+        WHERE
+        z.del_flag = '0'
+        AND z.id = #{id}
+        GROUP BY z.id
+    </select>
+
+</mapper>

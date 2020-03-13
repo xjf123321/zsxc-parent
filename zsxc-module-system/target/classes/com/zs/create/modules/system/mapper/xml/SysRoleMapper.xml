@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zs.create.modules.system.mapper.SysRoleMapper">
+
+    <!--根据用户id所有角色-->
+    <select id="roleList" parameterType="String" resultType="com.zs.create.modules.system.entity.SysRole">
+        SELECT s.user_id as id,r.role_name AS roleName,r.role_code AS roleCode FROM sys_user_role s JOIN
+        sys_role r ON r.id = s.role_id AND s.user_id = #{id}
+    </select>
+
+    <select id="selectRoleId" parameterType="string" resultType="string">
+        select id from sys_role where role_code = #{roleCode}
+    </select>
+
+</mapper>
